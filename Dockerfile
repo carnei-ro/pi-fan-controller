@@ -18,6 +18,8 @@ WORKDIR /pi-fan-controller
 ENV \
   PATH="/opt/venv/bin:$PATH" \
   CFLAGS="-fcommon" \
+  # Which PORT Prometheus will open to expose the metrics.
+  PROMETHEUS_PORT="8000" \
   # (degrees Celsius) Fan kicks on at this temperature.
   ON_THRESHOLD="65" \
   # (degress Celsius) Fan shuts off at this temperature.
@@ -32,3 +34,5 @@ COPY --from=builder /opt/venv /opt/venv
 COPY fancontrol.py fancontrol.py
 
 ENTRYPOINT [ "/pi-fan-controller/fancontrol.py" ]
+
+EXPOSE 8000
