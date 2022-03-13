@@ -3,12 +3,13 @@
 import time
 
 from gpiozero import OutputDevice
+from os import getenv
 
 
-ON_THRESHOLD = 65  # (degrees Celsius) Fan kicks on at this temperature.
-OFF_THRESHOLD = 55  # (degress Celsius) Fan shuts off at this temperature.
-SLEEP_INTERVAL = 5  # (seconds) How often we check the core temperature.
-GPIO_PIN = 17  # Which GPIO pin you're using to control the fan.
+ON_THRESHOLD = int(getenv('ON_THRESHOLD',"65"))  # (degrees Celsius) Fan kicks on at this temperature.
+OFF_THRESHOLD = int(getenv('OFF_THRESHOLD', "55"))  # (degress Celsius) Fan shuts off at this temperature.
+SLEEP_INTERVAL = int(getenv('SLEEP_INTERVAL', "5"))  # (seconds) How often we check the core temperature.
+GPIO_PIN = int(getenv('GPIO_PIN', '17'))  # Which GPIO pin you're using to control the fan.
 
 
 def get_temp():
